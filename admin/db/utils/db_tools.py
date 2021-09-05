@@ -2,8 +2,8 @@ from typer import echo
 
 
 def create_all() -> None:
-    from admin_original.db import metadata
-    from admin_original.db.utils.settings import DBSettings
+    from admin.db import metadata
+    from admin.db.utils.settings import DBSettings
 
     db_settings = DBSettings()
 

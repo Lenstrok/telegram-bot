@@ -10,7 +10,7 @@ from functools import partial
 
 from pydantic.json import custom_pydantic_encoder
 
-from admin_original.db import metadata
+from admin.db import metadata
 
 JsonSerializer = partial(
     json.dumps,
