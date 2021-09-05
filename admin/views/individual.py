@@ -1,8 +1,8 @@
 from flask_admin.contrib.sqla import ModelView
 
-from admin.views.agent import AgentInlineAdmin
-from admin.views.income import IncomeInlineAdmin
-from admin.db import Agent, TaxableIncome
+from admin_original.views.agent import AgentInlineAdmin
+from admin_original.views.income import IncomeInlineAdmin
+from admin_original.db import Agent, TaxableIncome
 
 
 class IndividualView(ModelView):

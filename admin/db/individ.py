@@ -1,7 +1,7 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
-from admin.db import BaseTable
+from admin_original.db import BaseTable
 
 
 class Individual(BaseTable):

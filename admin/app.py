@@ -13,9 +13,9 @@ def create_app() -> Flask:
 
     admin = Admin(app, name='Админка', index_view=AdminIndexView(name='lol', url='/'), template_mode='bootstrap4')
 
-    from admin.views.agent import AgentView
-    from admin.views.income import IncomeView
-    from admin.views.individual import IndividualView
+    from admin_original.views.agent import AgentView
+    from admin_original.views.income import IncomeView
+    from admin_original.views.individual import IndividualView
 
     admin.add_view(IndividualView(Individual, current_session, name='Физлицо'))
     admin.add_view(AgentView(Agent, current_session, name='Агент'))
