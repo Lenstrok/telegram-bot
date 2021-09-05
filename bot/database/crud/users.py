@@ -7,10 +7,11 @@ from bot.database.engine import Session
 from bot.database.crud import orders
 
 
-def create(session: Session, id: int) -> None:
+def create(session: Session, id: int) -> int:
     """Создать пользователя в базе данных."""
     session.add(User(id=id))
     orders.create(session, user_id=id)
+    return id
 
 
 def get_by_id(session: Session, id: int) -> User:

@@ -12,13 +12,12 @@ def create(session: Session, user_id: int) -> None:
     session.add(Order(user_id=user_id, price=0))
 
 
-def add(session: Session, user_id: int, product_name: str):
+def add(session: Session, user_id: int, product_id: int):
     """Добавить позицию в заказ."""
-    order = get_by_user_id(session, user_id)
-    product = products.get_by_name(session, product_name)  # todo если None, выводить ошибку (обрабатывать через if)
-    ordered_products.add(session, order.id, product.id)
-
     order = get_by_user_id(session, user_id)  # todo если None, выводить ошибку (обрабатывать через if)
+    product = products.get(session, product_id)  # todo если None, выводить ошибку (обрабатывать через if)
+
+    ordered_products.add(session, order.id, product.id)
     order.price += product.price
 
 
@@ -28,6 +27,17 @@ def get_by_user_id(session: Session, user_id: int) -> Optional[Order]:
         select(Order).
         filter_by(user_id=user_id)
     ).scalars().first()
+
+
+def remove(session: Session, user_id: int, product_id: int):
+    """Убрать позицию из заказа."""
+    order = get_by_user_id(session, user_id)  # todo если None, выводить ошибку (обрабатывать через if)
+    product = products.get(session, product_id)  # todo если None, выводить ошибку (обрабатывать через if)
+    ordered_product = ordered_products.get(session, order_id=order.id, product_id=product.id)
+
+    if ordered_product.count > 0:
+        ordered_product.count -= 1
+        order.price -= product.price
 
 
 def delete_by_user_id(session: Session, user_id: int) -> None:
