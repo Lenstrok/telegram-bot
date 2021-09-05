@@ -12,27 +12,35 @@ class User(Base):
     full_name = Column(String(255))
     phone_number = Column(String(25))
 
-    basket = relationship("Basket")
+    order = relationship("Order")
 
 
-class Basket(Base):
-    __tablename__ = 'basket'
+class Order(Base):
+    __tablename__ = 'order'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     price = Column(Integer)
     delivery_id = Column(Integer)
     address_to = Column(String(1000))
 
-    basket = relationship("Product")
+    ordered_product = relationship("OrderedProduct")
 
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'), unique=True)
+
+
+class OrderedProduct(Base):
+    __tablename__ = 'ordered_product'
+
+    order_id = Column(Integer, ForeignKey('order.id'), primary_key=True)
+    product_id = Column(Integer, ForeignKey('product.id'), primary_key=True)
+    count = Column(Integer)
 
 
 class Product(Base):
     __tablename__ = 'product'
 
     id = Column(Integer, primary_key=True)
-    product_id = Column(Integer)
+    name = Column(String(255), unique=True)
     price = Column(Integer)
 
-    basket_id = Column(Integer, ForeignKey('basket.id'))
+    ordered_product = relationship("OrderedProduct")
