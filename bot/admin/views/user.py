@@ -11,4 +11,11 @@ class UserView(ModelView):
 
     column_sortable_list = ['id']
 
+    page_size = 25
     edit_template = 'individual_edit.html'
+
+    column_labels = {
+        'id': 'Идентификатор',
+        'full_name': 'ФИО',
+        'phone_number': 'Номер телефона',
+    }
