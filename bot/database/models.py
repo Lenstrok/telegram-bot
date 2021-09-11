@@ -27,7 +27,6 @@ class Order(Base):
     ordered_product = relationship("OrderedProduct")
 
 
-
 class OrderedProduct(Base):
     __tablename__ = 'ordered_product'
 
