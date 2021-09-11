@@ -13,7 +13,7 @@ def create_app() -> Flask:
 
     admin = Admin(app, name='Админка', index_view=AdminIndexView(name='lol', url='/'), template_mode='bootstrap4')
 
-    from admin.views.individual import UserView
+    from bot.admin.views.individual import UserView
 
     from bot.database.engine import engine
     from sqlalchemy.orm import sessionmaker, scoped_session
